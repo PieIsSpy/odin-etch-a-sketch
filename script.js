@@ -24,15 +24,25 @@ function initializeDivs() {
 function styleCells() {
     const cells = document.querySelectorAll(".cell")
     cells.forEach((cell) => {
-        cell.style.border = "3px solid red";
+        cell.style.border = "3px solid black";
         cell.style.width = "100px";
         cell.style.height = "100px";
+    });
+}
+
+function addCellEvents() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.addEventListener("mouseover", () => {
+            cell.style.backgroundColor = "black";
+        })
     });
 }
 
 function main() {
     initializeDivs();
     styleCells();
+    addCellEvents();
 }
 
 main();
