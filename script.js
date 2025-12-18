@@ -62,10 +62,13 @@ function addCellEvents() {
                     cell.style.backgroundColor = "black";
                     break;
                 case "Rainbow":
-                    const color = getRandomColor()
+                    var color = getRandomColor()
                     cell.style.backgroundColor = color;
                     break;
                 case "Darkening":
+                    var color = getDarkerColor(cell);
+                    cell.style.backgroundColor = color;
+                    break;
             }
         })
     });
@@ -77,6 +80,24 @@ function getRandomColor() {
     const b = Math.random() * 256;
 
     return `rgb(${r}, ${g}, ${b})`;
+}
+
+function getDarkerColor(cell) {
+    var curColor = cell.style.backgroundColor;
+    if (curColor.length != 0) {
+        var curIndex = 0;
+        for (let i = 0; i < 3; i++) {
+            curIndex = curColor.indexOf(",", curIndex) + 1;
+        }
+        var temp = curColor.slice(curIndex);
+        temp = temp.substring(0, temp.length);
+
+        const alpha = parseFloat(temp)
+        return `rgba(0, 0, 0, ${alpha + .1})`;
+    }
+    else {
+        return `rgb(0, 0, 0, .1)`;
+    }
 }
 
 function addButtonListeners() {
