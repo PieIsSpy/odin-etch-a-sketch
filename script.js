@@ -1,3 +1,6 @@
+var curMode = "Normal";
+var curSize = 100;
+
 function styleContainer() {
     const container = document.querySelector("#container");
     
@@ -54,7 +57,11 @@ function addCellEvents() {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.addEventListener("mouseover", () => {
-            cell.style.backgroundColor = "black";
+            switch(curMode) {
+                case "Normal":
+                    cell.style.backgroundColor = "black";
+                    break;
+            }
         })
     });
 }
@@ -63,17 +70,24 @@ function addButtonListener() {
     const button = document.querySelector("#generate");
 
     button.addEventListener("click", () => {
-        const sizeText = document.querySelector("#size");
-        const sizeNum = parseInt(sizeText.value);
-
-        if (!isNaN(sizeNum) &&
-            sizeNum >= 1 && sizeNum <= 100
-        ) {
-            destroyCanvas();
-            initializeCanvas(sizeNum);
-        }
+        getInput()
     });
-    console.log("ran!")
+}
+
+function getInput() {
+    const sizeText = document.querySelector("#size");
+    const sizeNum = parseInt(sizeText.value);
+
+    if (isValidInput(sizeNum)) {
+        curSize = sizeNum;
+        destroyCanvas();
+        initializeCanvas(curSize);
+    }
+}
+
+function isValidInput(input) {
+    return !isNaN(input) &&
+            input >= 1 && input <= 100;
 }
 
 function destroyCanvas() {
@@ -92,7 +106,7 @@ function initializeCanvas(size) {
 
 function main() {
     styleContainer();
-    initializeCanvas(100);
+    initializeCanvas(curSize);
     addButtonListener();
 }
 
