@@ -1,3 +1,17 @@
+function styleContainer() {
+    const container = document.querySelector("#container");
+    
+    container.style.width = "400px";
+    container.style.height = "400px";
+    container.style.border = "2px solid black";
+
+    container.style.display = "flex";
+    container.style.flexDirection = "column"
+    
+    container.style.justifyContent = "center";
+    container.style.alignItems = "center";
+}
+
 function initializeDivs(gridSize) {
     const container = document.querySelector("#container");
 
@@ -16,16 +30,22 @@ function initializeDivs(gridSize) {
         }
         container.appendChild(row);
     });
+}
 
-    container.style.display = "flex";
+function styleRows() {
+    const rows = document.querySelectorAll(".row")
+    rows.forEach((row) => {
+       row.style.display = "flex";
+       row.style.flex = "1"
+       row.style.width = "100%"
+    });
 }
 
 function styleCells() {
-    const cells = document.querySelectorAll(".cell")
+    const cells = document.querySelectorAll(".row .cell");
     cells.forEach((cell) => {
-        cell.style.border = "3px solid black";
-        cell.style.width = "100px";
-        cell.style.height = "100px";
+        cell.style.flex = "1";
+        cell.style.boxSizing = "border-box";
     });
 }
 
@@ -39,7 +59,9 @@ function addCellEvents() {
 }
 
 function main() {
-    initializeDivs(10);
+    styleContainer();
+    initializeDivs(100);
+    styleRows();
     styleCells();
     addCellEvents();
 }
