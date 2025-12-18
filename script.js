@@ -1,15 +1,15 @@
-function initializeDivs() {
+function initializeDivs(gridSize) {
     const container = document.querySelector("#container");
 
     const rows = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < gridSize; i++) {
         const row = document.createElement("div");
         row.setAttribute("class", "row");
         rows.push(row);
     }
 
     rows.forEach((row) => {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < gridSize; i++) {
             const col = document.createElement("div");
             col.setAttribute("class", "cell");
             row.appendChild(col);
@@ -18,7 +18,6 @@ function initializeDivs() {
     });
 
     container.style.display = "flex";
-    container.style.justifyContent = "center";
 }
 
 function styleCells() {
@@ -40,7 +39,7 @@ function addCellEvents() {
 }
 
 function main() {
-    initializeDivs();
+    initializeDivs(10);
     styleCells();
     addCellEvents();
 }
