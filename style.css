@@ -4,3 +4,10 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#modes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    gap: 5px;
+}

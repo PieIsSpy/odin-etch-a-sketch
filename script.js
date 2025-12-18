@@ -61,20 +61,36 @@ function addCellEvents() {
                 case "Normal":
                     cell.style.backgroundColor = "black";
                     break;
+                case "Rainbow":
+                    const r = Math.random() * 256;
+                    const g = Math.random() * 256;
+                    const b = Math.random() * 256;
+                    const color = `rgba(${r}, ${g}, ${b})`;
+                    cell.style.backgroundColor = color;
             }
         })
     });
 }
 
-function addButtonListener() {
+function addButtonListeners() {
     const button = document.querySelector("#generate");
 
     button.addEventListener("click", () => {
-        getInput()
+        setCurSize()
     });
+
+    const modes = document.querySelectorAll(".mode");
+    const modesStr = ["Normal", "Rainbow", "Darkening"];
+    modes.forEach((mode, index) => {
+        mode.addEventListener("click", () => {
+            curMode = modesStr[index];
+            destroyCanvas();
+            initializeCanvas(curSize);
+        })
+    })
 }
 
-function getInput() {
+function setCurSize() {
     const sizeText = document.querySelector("#size");
     const sizeNum = parseInt(sizeText.value);
 
@@ -107,7 +123,7 @@ function initializeCanvas(size) {
 function main() {
     styleContainer();
     initializeCanvas(curSize);
-    addButtonListener();
+    addButtonListeners();
 }
 
 main();
