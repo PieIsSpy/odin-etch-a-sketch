@@ -92,8 +92,11 @@ function getDarkerColor(cell) {
         var temp = curColor.slice(curIndex);
         temp = temp.substring(0, temp.length);
 
-        const alpha = parseFloat(temp)
-        return `rgba(0, 0, 0, ${alpha + .1})`;
+        var alpha = parseFloat(temp);
+        if (alpha < 1)
+            alpha += .1;
+
+        return `rgba(0, 0, 0, ${alpha})`;
     }
     else {
         return `rgb(0, 0, 0, .1)`;
