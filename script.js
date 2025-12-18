@@ -62,14 +62,21 @@ function addCellEvents() {
                     cell.style.backgroundColor = "black";
                     break;
                 case "Rainbow":
-                    const r = Math.random() * 256;
-                    const g = Math.random() * 256;
-                    const b = Math.random() * 256;
-                    const color = `rgba(${r}, ${g}, ${b})`;
+                    const color = getRandomColor()
                     cell.style.backgroundColor = color;
+                    break;
+                case "Darkening":
             }
         })
     });
+}
+
+function getRandomColor() {
+    const r = Math.random() * 256;
+    const g = Math.random() * 256;
+    const b = Math.random() * 256;
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 function addButtonListeners() {
