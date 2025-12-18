@@ -10,6 +10,7 @@ function styleContainer() {
     
     container.style.justifyContent = "center";
     container.style.alignItems = "center";
+    container.style.marginTop = "15px";
 }
 
 function initializeDivs(gridSize) {
@@ -42,7 +43,7 @@ function styleRows() {
 }
 
 function styleCells() {
-    const cells = document.querySelectorAll(".row .cell");
+    const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.style.flex = "1";
         cell.style.boxSizing = "border-box";
@@ -58,12 +59,41 @@ function addCellEvents() {
     });
 }
 
-function main() {
-    styleContainer();
-    initializeDivs(100);
+function addButtonListener() {
+    const button = document.querySelector("#generate");
+
+    button.addEventListener("click", () => {
+        const sizeText = document.querySelector("#size");
+        const sizeNum = parseInt(sizeText.value);
+
+        if (!isNaN(sizeNum) &&
+            sizeNum >= 1 && sizeNum <= 100
+        ) {
+            destroyCanvas();
+            initializeCanvas(sizeNum);
+        }
+    });
+    console.log("ran!")
+}
+
+function destroyCanvas() {
+    const rows = document.querySelectorAll(".row");
+    rows.forEach((row) => {
+        row.remove();
+    });
+}
+
+function initializeCanvas(size) {
+    initializeDivs(size);
     styleRows();
     styleCells();
     addCellEvents();
+}
+
+function main() {
+    styleContainer();
+    initializeCanvas(100);
+    addButtonListener();
 }
 
 main();
